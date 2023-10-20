@@ -1,9 +1,10 @@
+import Signup from "../../components/Signup/Signup";
+
 export default function HomePage() {
     return (
-        <>
-            <main className="main">
-                <p>Home Page</p>
-            </main>
-        </>
+        <div className="homepage">
+            <h1>Welcome to ArgentBank</h1>
+            <Signup />
+        </div>
     );
 }

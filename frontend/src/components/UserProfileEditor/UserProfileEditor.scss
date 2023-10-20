@@ -1,0 +1,45 @@
+.userprofileeditor {
+    h1 {
+        margin: 20px 0;
+    }
+
+    .container-inputs,
+    .container-buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+    .input-fields {
+        width: 180px;
+        height: 40px;
+        margin-bottom: 10px;
+        padding: 8px;
+        border: 1px solid $border-grey;
+        border-radius: 5px;
+
+        &.error {
+            margin-bottom: 0px;
+        }
+
+        &:focus {
+            border-color: $green-light;
+        }
+        &:focus-visible {
+            outline: none;
+        }
+    }
+
+    button {
+        width: 80px;
+        height: 40px;
+        display: block;
+        text-decoration: none;
+        color: $purple;
+        background: $white;
+        border: 1px solid $purple;
+        border-radius: 5px;
+        outline: none;
+        cursor: pointer;
+    }
+}

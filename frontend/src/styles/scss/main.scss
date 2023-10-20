@@ -5,3 +5,12 @@
 @import "./base/_reset";
 @import "./base/_base";
 @import "./base/_typography";
+
+@import "../../pages/HomePage/HomePage.scss";
+@import "../../pages/Login/Login.scss";
+@import "../../pages/ProfilePage/ProfilePage.scss";
+
+@import "../../components/Header/Header.scss";
+@import "../../components/Footer/Footer.scss";
+@import "../../components/Signup/Signup.scss";
+@import "../../components/UserProfileEditor/UserProfileEditor.scss";

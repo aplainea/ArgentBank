@@ -7,11 +7,17 @@ html {
     color: $text;
 }
 
-body {
-    margin: 0;
+body,
+#root {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    margin: 0;
+}
+
+main {
+    flex: 1;
+    background: $grey-light;
 }
 
 a {
@@ -29,17 +35,10 @@ figure,
 h1,
 h2,
 h3 {
+    word-break: break-word;
     margin: 0;
 }
 
 ul {
     padding: 0;
-}
-
-@media screen and (max-width: 1400px) {
-    .app {
-        .page {
-            margin: 20px;
-        }
-    }
 }
