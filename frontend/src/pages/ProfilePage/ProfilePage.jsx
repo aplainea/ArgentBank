@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { fetchUser } from "../../redux/user/userActions";
 import { useUser, useToken } from "../../hooks/userHooks";
 import UserProfileEditor from "../../components/UserProfileEditor/UserProfileEditor";
+import UserAccounts from "../../components/UserAccounts/UserAccounts";
 
 export default function ProfilePage() {
     const token = useToken();
@@ -24,6 +25,7 @@ export default function ProfilePage() {
     return (
         <div className="profilepage">
             <UserProfileEditor user={user} token={token} />
+            <UserAccounts />
         </div>
     );
 }

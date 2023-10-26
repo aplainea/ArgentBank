@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import "./styles/scss/main.scss";
 import App from "./App";
-import ErrorPage from "./pages/Error/ErrorPage.jsx";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
