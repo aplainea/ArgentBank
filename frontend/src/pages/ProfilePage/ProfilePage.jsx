@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchUser } from "../../redux/user/userActions";
 import { useUser, useToken } from "../../hooks/userHooks";
@@ -9,13 +10,16 @@ export default function ProfilePage() {
     const token = useToken();
     const user = useUser();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        if (token) {
+        if (!token) {
+            navigate("/");
+        } else {
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             dispatch(fetchUser(token));
         }
-    }, [dispatch, token]);
+    }, [dispatch, navigate, token]);
 
     return (
         <div className="profilepage">

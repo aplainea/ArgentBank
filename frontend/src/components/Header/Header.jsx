@@ -31,7 +31,7 @@ export default function Header() {
 
     return (
         <header>
-            <NavLink to={token ? "/profile" : "/"}>
+            <NavLink to="/">
                 <h1 className="sr-only">ArgentBank</h1>
                 <img
                     src={ArgentBankLogo}
@@ -71,7 +71,11 @@ export default function Header() {
                     </div>
                 ) : (
                     <NavLink
-                        to={location.pathname === "/login" ? "/" : "/login"}
+                        to={
+                            location.pathname === "/login"
+                                ? "/signup"
+                                : "/login"
+                        }
                         className="sign-button sign-button-in"
                     >
                         {location.pathname === "/login"

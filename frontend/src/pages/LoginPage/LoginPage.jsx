@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../../redux/auth/authActions";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useToken } from "../../hooks/userHooks";
 
 export default function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const token = useToken();
     const errorLogin = useSelector((state) => state.auth.errorLogin);
 
     const [email, setEmail] = useState("");
@@ -38,11 +40,16 @@ export default function Login() {
 
         dispatch(loginAction({ email, password }));
 
-        if (!errorLogin) {
-            console.log("wtf");
+        // if (!errorLogin) {
+        //     navigate("/profile");
+        // }
+    };
+
+    useEffect(() => {
+        if (!errorLogin && token) {
             navigate("/profile");
         }
-    };
+    }, [errorLogin, navigate, token]);
 
     return (
         <div className="login-container">
@@ -67,6 +74,9 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
             />
             {passwordError && <p className="error-message">{passwordError}</p>}
+            <NavLink to="/signup">
+                <p className="new-account">Create an account</p>
+            </NavLink>
 
             <button onClick={handleLogin}>Sign in</button>
             {errorLogin && (

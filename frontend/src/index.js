@@ -6,8 +6,9 @@ import "./styles/scss/main.scss";
 import App from "./App";
 import ErrorPage from "./pages/Error/ErrorPage.jsx";
 import HomePage from "./pages/HomePage/HomePage";
-import Login from "./pages/Login/Login";
+import LoginPage from "./pages/LoginPage/LoginPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import SignupPage from "./pages/SignupPage/SignupPage";
 
 const router = createBrowserRouter([
     {
@@ -20,8 +21,12 @@ const router = createBrowserRouter([
                 element: <HomePage />,
             },
             {
+                path: "signup",
+                element: <SignupPage />,
+            },
+            {
                 path: "login",
-                element: <Login />,
+                element: <LoginPage />,
             },
             {
                 path: "profile",

@@ -1,7 +1,7 @@
-.signup-container {
+.login-container {
     width: 400px;
     height: auto;
-    margin: 0 auto;
+    margin: 77.2px auto;
     padding: 40px;
     border: 1px solid $border-grey;
     border-radius: 10px;
@@ -55,6 +55,21 @@
 
         :hover {
             background: #3bade3;
+        }
+    }
+
+    .new-account {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-weight: bold;
+        color: $text;
+        margin: 10px;
+
+        &:hover {
+            color: $text-active;
+            text-decoration: underline;
         }
     }
 
