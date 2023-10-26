@@ -1,5 +1,10 @@
 import axios from "axios";
 
+/**
+ * Fetches user data from the server using the provided token.
+ * @param {string} token - The user token used for authentication.
+ * @returns {Function} - A function that dispatches actions to the user reducer.
+ */
 export const fetchUser = (token) => {
     return async (dispatch) => {
         try {
@@ -27,6 +32,11 @@ export const fetchUser = (token) => {
     };
 };
 
+/**
+ * Action creator function that returns an action object to update user data.
+ * @param {Object} userData - The updated user data.
+ * @returns {Object} - The action object with type and payload properties.
+ */
 export const updateUserAction = (userData) => {
     return {
         type: "UPDATE_USER",

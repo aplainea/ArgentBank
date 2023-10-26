@@ -3,6 +3,10 @@ import IconChat from "../../assets/icon-chat.png";
 import IconMoney from "../../assets/icon-money.png";
 import IconSecurity from "../../assets/icon-security.png";
 
+/**
+ * Renders a section with features.
+ * @returns {JSX.Element} The Features component.
+ */
 export default function Features() {
     const features = [
         {

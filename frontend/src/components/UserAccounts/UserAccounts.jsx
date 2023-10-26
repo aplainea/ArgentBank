@@ -1,6 +1,18 @@
 import Account from "./Account";
 
+/**
+ * Renders a list of user accounts.
+ * @returns {JSX.Element} The UserAccounts component.
+ */
 export default function UserAccounts() {
+    /**
+     * Creates an account object with the given parameters.
+     * @param {string} accountType - The type of the account.
+     * @param {string} accountIdentifier - The identifier of the account.
+     * @param {number} accountBalance - The balance of the account.
+     * @param {string} [bank="ArgentBank"] - The name of the bank. Defaults to "ArgentBank".
+     * @returns {object} An account object with the given parameters.
+     */
     function createAccount(
         accountType,
         accountIdentifier,

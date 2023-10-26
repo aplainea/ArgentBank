@@ -1,3 +1,12 @@
+/**
+ * Renders a feature item with a title, description and icon.
+ * @param {Object} props - The component props.
+ * @param {string} props.title - The title of the feature item.
+ * @param {string} props.description - The description of the feature item.
+ * @param {string} props.iconSource - The source URL of the icon for the feature item.
+ * @param {string} props.iconAlt - The alt text for the icon of the feature item.
+ * @returns {JSX.Element} - The JSX element representing the feature item.
+ */
 export default function FeatureItem({
     title,
     description,

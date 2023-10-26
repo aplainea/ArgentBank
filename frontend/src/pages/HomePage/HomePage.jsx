@@ -1,5 +1,9 @@
 import Features from "../../components/Features/Features";
 
+/**
+ * Renders the home page of Argent Bank website.
+ * @returns {JSX.Element} The home page component.
+ */
 export default function HomePage() {
     return (
         <div className="homepage">

@@ -2,6 +2,11 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Signup page component that handles user input validation and sends a POST request to the server to create a new account.
+ * @function SignuPage
+ * @returns {JSX.Element}
+ */
 export default function SignuPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -14,6 +19,12 @@ export default function SignuPage() {
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
+    /**
+     * Handles the signup process by validating user input and sending a POST request to the server.
+     * @async
+     * @function handleSignup
+     * @returns {Promise<void>}
+     */
     const handleSignup = async () => {
         setEmailError("");
         setPasswordError("");

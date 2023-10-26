@@ -4,6 +4,10 @@ import { loginAction } from "../../redux/auth/authActions";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useToken } from "../../hooks/userHooks";
 
+/**
+ * Renders the login page with email and password input fields, and handles the login process.
+ * @returns {JSX.Element} - The login page component.
+ */
 export default function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -15,6 +19,11 @@ export default function Login() {
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
 
+    /**
+     * Returns an error message based on the error text.
+     * @param {string} errorText - The error text to analyze.
+     * @returns {string} - The error message to display.
+     */
     const getErrorMessage = (errorText) => {
         if (errorText.includes("400")) {
             return "Error 400: Invalid Fields.";
@@ -25,6 +34,12 @@ export default function Login() {
         }
     };
 
+    /**
+     * Handles the login process.
+     * @async
+     * @function
+     * @returns {void}
+     */
     const handleLogin = async () => {
         setEmailError("");
         setPasswordError("");
@@ -39,10 +54,6 @@ export default function Login() {
         }
 
         dispatch(loginAction({ email, password }));
-
-        // if (!errorLogin) {
-        //     navigate("/profile");
-        // }
     };
 
     useEffect(() => {

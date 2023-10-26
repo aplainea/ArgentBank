@@ -1,5 +1,12 @@
 import axios from "axios";
 
+/**
+ * Logs in the user with the provided credentials.
+ * @param {Object} credentials - The user's login credentials.
+ * @param {string} credentials.email - The user's email address.
+ * @param {string} credentials.password - The user's password.
+ * @returns {Function} An async function that dispatches a login success action with the user's token if successful, or a login failure action with the error message if unsuccessful.
+ */
 export const loginAction = (credentials) => {
     return async (dispatch) => {
         try {
@@ -18,6 +25,10 @@ export const loginAction = (credentials) => {
     };
 };
 
+/**
+ * Action creator function that dispatches a LOGOUT action.
+ * @returns {Function} A function that takes a dispatch argument to dispatch the LOGOUT action.
+ */
 export const logoutAction = () => {
     return (dispatch) => {
         dispatch({ type: "LOGOUT" });

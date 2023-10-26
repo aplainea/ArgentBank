@@ -1,5 +1,9 @@
 import { NavLink } from "react-router-dom";
 
+/**
+ * Renders the ErrorPage component.
+ * @returns {JSX.Element} The ErrorPage component
+ */
 export default function ErrorPage() {
     return (
         <main className="main error-page">

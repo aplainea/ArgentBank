@@ -10,6 +10,10 @@ import LogoutIcon from "../../assets/logout-icon.png";
 import UserIcon from "../../assets/user-icon.png";
 import axios from "axios";
 
+/**
+ * Header component that displays the ArgentBank logo and user sign-in/sign-out buttons.
+ * @returns {JSX.Element} Header component
+ */
 export default function Header() {
     const location = useLocation();
     const dispatch = useDispatch();
@@ -24,6 +28,9 @@ export default function Header() {
         }
     }, [dispatch, token]);
 
+    /**
+     * Handles the sign out functionality by dispatching the logoutAction and navigating to the login page.
+     */
     const handleSignOut = () => {
         dispatch(logoutAction());
         navigate("/login");

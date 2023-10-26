@@ -4,11 +4,23 @@ import axios from "axios";
 
 import { updateUserAction } from "../../redux/user/userActions";
 
+/**
+ * Renders a form to edit the user's profile information.
+ * @function
+ * @param {string} token - The user's authentication token.
+ * @param {object} user - The user's information.
+ * @returns {JSX.Element}
+ */
 const UserProfileEditor = ({ token, user }) => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const dispatch = useDispatch();
 
+    /**
+     * Handles saving user profile changes by sending a PUT request to the server.
+     * @function
+     * @returns {void}
+     */
     const handleSave = () => {
         const config = {
             headers: {
@@ -28,6 +40,11 @@ const UserProfileEditor = ({ token, user }) => {
             });
     };
 
+    /**
+     * Resets the first name and last name fields to their original values.
+     * @function
+     * @returns {void}
+     */
     const handleCancel = () => {
         setFirstName(user.firstName);
         setLastName(user.lastName);

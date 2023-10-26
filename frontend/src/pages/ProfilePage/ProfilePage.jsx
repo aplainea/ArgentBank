@@ -7,6 +7,10 @@ import { useUser, useToken } from "../../hooks/userHooks";
 import UserProfileEditor from "../../components/UserProfileEditor/UserProfileEditor";
 import UserAccounts from "../../components/UserAccounts/UserAccounts";
 
+/**
+ * Renders the profile page with user information and accounts.
+ * @returns {JSX.Element} The profile page component
+ */
 export default function ProfilePage() {
     const token = useToken();
     const user = useUser();
