@@ -1,166 +1,396 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
-  title: Bank Argent API documentation
-  description: Contains all available API endpoints in this codebase
-  version: '1.0.0'
-  termsOfService: 'http://swagger.io/terms/'
+    title: Bank Argent API documentation
+    description: Contains all available API endpoints in this codebase
+    version: "1.0.0"
+    termsOfService: "http://swagger.io/terms/"
 host: localhost:3001
 basePath: /api/v1
 schemes:
-  - http
+    - http
 paths:
-  /user/login:
-    post:
-      tags:
-        - User Module
-      summary: Login
-      description: API for Login
-      parameters:
-        - in: body
-          name: body
-          description: Login Payload
-          required: true
-          schema:
-            $ref: '#/definitions/Login'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Login Successfully
-          schema:
-            $ref: '#/definitions/LoginResponse'
-        '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error
-  /user/signup:
-    post:
-      tags:
-        - User Module
-      summary: Signup
-      description: API for Signup
-      parameters:
-        - in: body
-          name: body
-          description: Signup Payload
-          required: true
-          schema:
-            $ref: '#/definitions/User'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Signup Successfully
-          schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error
-  /user/profile:
-    post:
-      security:
-        - Bearer: []
-      tags:
-        - User Module
-      summary: User Profile API
-      description: API for fetching a user profile
-      parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
-          required: true
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: User profile retrieved successully
-          schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error
-    put:
-      security:
-        - Bearer: []
-      tags:
-        - User Module
-      summary: User Profile API
-      description: API for updating a user profile
-      parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
-          required: true
-        - in: body
-          name: body
-          description: Update user profile attributes
-          required: true
-          schema:
-            $ref: '#/definitions/UserProfile'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: User profile retrieved successully
-          schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error
-securityDefinitions:
-  Bearer:
-    type: apiKey
-    name: Authorization
-    in: header
+    /user/login:
+        post:
+            tags:
+                - User Module
+            summary: Login
+            description: API for Login
+            consumes:
+                - application/json
+            produces:
+                - application/json
+            parameters:
+                - name: body
+                  in: body
+                  required: true
+                  schema:
+                      $ref: "#/definitions/Login"
+            responses:
+                200:
+                    description: Login Successfully
+                    schema:
+                        $ref: "#/definitions/LoginResponse"
+                400:
+                    description: Invalid Fields
+                    schema:
+                        $ref: "#/definitions/BadRequestError"
+                500:
+                    description: Internal Server Error
+                    schema:
+                        $ref: "#/definitions/InternalServerError"
+    /user/signup:
+        post:
+            tags:
+                - User Module
+            summary: Signup
+            description: API for Signup
+            consumes:
+                - application/json
+            produces:
+                - application/json
+            parameters:
+                - name: body
+                  in: body
+                  required: true
+                  schema:
+                      $ref: "#/definitions/User"
+            responses:
+                200:
+                    description: Signup Successfully
+                    schema:
+                        $ref: "#/definitions/ApiResponse"
+                400:
+                    description: Invalid Fields
+                    schema:
+                        $ref: "#/definitions/BadRequestError"
+                500:
+                    description: Internal Server Error
+                    schema:
+                        $ref: "#/definitions/InternalServerError"
+    /user/profile:
+        post:
+            tags:
+                - User Module
+            summary: User Profile API
+            description: API for fetching a user profile
+            consumes:
+                - application/json
+            produces:
+                - application/json
+            parameters:
+                - name: body
+                  in: body
+                  required: true
+                  schema:
+                      $ref: "#/definitions/UserProfile"
+            security:
+                - Bearer: []
+            responses:
+                200:
+                    description: User profile retrieved successfully
+                    schema:
+                        $ref: "#/definitions/ApiResponse"
+                400:
+                    description: Invalid Fields
+                    schema:
+                        $ref: "#/definitions/BadRequestError"
+                500:
+                    description: Internal Server Error
+                    schema:
+                        $ref: "#/definitions/InternalServerError"
+        put:
+            tags:
+                - User Module
+            summary: User Profile API
+            description: API for updating a user profile
+            consumes:
+                - application/json
+            produces:
+                - application/json
+            parameters:
+                - name: body
+                  in: body
+                  required: true
+                  schema:
+                      $ref: "#/definitions/UserProfile"
+            security:
+                - Bearer: []
+            responses:
+                200:
+                    description: User profile updated successfully
+                    schema:
+                        $ref: "#/definitions/ApiResponse"
+                400:
+                    description: Invalid Fields
+                    schema:
+                        $ref: "#/definitions/BadRequestError"
+                500:
+                    description: Internal Server Error
+                    schema:
+                        $ref: "#/definitions/InternalServerError"
+    /user/accounts:
+        get:
+            tags:
+                - User Module
+            summary: User Accounts API
+            description: API to get all user accounts
+            consumes:
+                - application/json
+            produces:
+                - application/json
+            security:
+                - Bearer: []
+            responses:
+                200:
+                    description: Successfully retrieved accounts
+                    schema:
+                        $ref: "#/definitions/AccountResponse"
+                400:
+                    description: Bad Request - Invalid parameters or request
+                    schema:
+                        $ref: "#/definitions/BadRequestError"
+                401:
+                    description: Unauthorized - Access token is missing or invalid
+                    schema:
+                        $ref: "#/definitions/UnauthorizedError"
+                404:
+                    description: Not Found - Resource not found
+                    schema:
+                        $ref: "#/definitions/NotFoundError"
+                500:
+                    description: Internal Server Error - Something went wrong on the server
+                    schema:
+                        $ref: "#/definitions/InternalServerError"
+    /user/accounts/{accountID}/transactions:
+        get:
+            tags:
+                - User Module
+            summary: User Accounts Transactions API
+            description: API to get all transactions for a user account
+            consumes:
+                - application/json
+            produces:
+                - application/json
+            security:
+                - Bearer: []
+            parameters:
+                - name: accountID
+                  in: path
+                  required: true
+                  type: string
+            responses:
+                200:
+                    description: Successfully retrieved transactions
+                    schema:
+                        $ref: "#/definitions/TransactionsResponse"
+                400:
+                    description: Bad Request - Invalid parameters or request
+                    schema:
+                        $ref: "#/definitions/BadRequestError"
+                401:
+                    description: Unauthorized - Access token is missing or invalid
+                    schema:
+                        $ref: "#/definitions/UnauthorizedError"
+                404:
+                    description: Not Found - Resource not found
+                    schema:
+                        $ref: "#/definitions/NotFoundError"
+                500:
+                    description: Internal Server Error - Something went wrong on the server
+                    schema:
+                        $ref: "#/definitions/InternalServerError"
+    /user/accounts/{accountID}/transactions/{transactionID}:
+        patch:
+            tags:
+                - User Module
+            summary: User Account Transaction API
+            description: API to add or update a note or a category on a user account transaction
+            consumes:
+                - application/json
+            produces:
+                - application/json
+            parameters:
+                - name: accountID
+                  in: path
+                  required: true
+                  type: string
+                - name: transactionID
+                  in: path
+                  required: true
+                  type: string
+                - name: body
+                  in: body
+                  required: true
+                  schema:
+                      type: object
+                      properties:
+                          category:
+                              $ref: "#/definitions/TransactionCategory"
+                          note:
+                              type: string
+                              format: string
+            responses:
+                200:
+                    description: Successfully updated the transaction details
+                    schema:
+                        $ref: "#/definitions/TransactionsResponse"
+                400:
+                    description: Bad Request - Invalid parameters or request
+                    schema:
+                        $ref: "#/definitions/BadRequestError"
+                401:
+                    description: Unauthorized - Access token is missing or invalid
+                    schema:
+                        $ref: "#/definitions/UnauthorizedError"
+                404:
+                    description: Not Found - Resource not found
+                    schema:
+                        $ref: "#/definitions/NotFoundError"
+                500:
+                    description: Internal Server Error - Something went wrong on the server
+                    schema:
+                        $ref: "#/definitions/InternalServerError"
 definitions:
-  User:
-    properties:
-      email:
-        type: string
-        description: user email
-      password:
-        type: string
-        description: user password
-      firstName:
-        type: string
-        description: user first name
-      lastName:
-        type: string
-        description: user last name
-  Login:
-    properties:
-      email:
-        type: string
-        description: user email
-      password:
-        type: string
-        description: user password
-  ApiResponse:
-    type: object
-    properties:
-      status:
-        type: integer
-      message:
-        type: string
-      body:
+    Login:
         type: object
         properties:
-          id:
-            type: string
-          email:
-            type: string
-  LoginResponse:
-    type: object
-    properties:
-      token:
+            email:
+                type: string
+                description: User email
+            password:
+                type: string
+                description: User password
+    LoginResponse:
+        type: object
+        properties:
+            token:
+                type: string
+    User:
+        type: object
+        properties:
+            email:
+                type: string
+                description: User email
+            password:
+                type: string
+                description: User password
+            firstName:
+                type: string
+                description: User first name
+            lastName:
+                type: string
+                description: User last name
+    ApiResponse:
+        type: object
+        properties:
+            status:
+                type: integer
+            message:
+                type: string
+            body:
+                type: object
+                properties:
+                    id:
+                        type: string
+                    email:
+                        type: string
+    UserProfile:
+        type: object
+        properties:
+            firstName:
+                type: string
+            lastName:
+                type: string
+    AccountResponse:
+        type: object
+        properties:
+            status:
+                type: integer
+            message:
+                type: string
+            body:
+                type: array
+                items:
+                    $ref: "#/definitions/Account"
+    Account:
+        type: object
+        properties:
+            type:
+                type: string
+                enum:
+                    - Checking
+                    - Savings
+                    - Credit Card
+            identifier:
+                type: string
+                pattern: '^x\d{4}$'
+            description:
+                type: string
+                enum:
+                    - Available Balance
+                    - Current Balance
+            balance:
+                $ref: "#/definitions/MonetaryValue"
+    MonetaryValue:
         type: string
-  UserProfile:
-    type: object
-    properties:
-      firstName:
+        pattern: '^[0-9]*\.[0-9]{2}$'
+        description: Monetary value to exactly two decimal places
+    TransactionsResponse:
+        type: object
+        properties:
+            status:
+                type: integer
+            message:
+                type: string
+            body:
+                type: array
+                items:
+                    $ref: "#/definitions/Transaction"
+    Transaction:
+        type: object
+        properties:
+            id:
+                type: string
+            date:
+                type: string
+                format: date-time
+                description: Complete date (mm dd, YYYY)
+            description:
+                type: string
+            amount:
+                $ref: "#/definitions/MonetaryValue"
+            balance:
+                $ref: "#/definitions/MonetaryValue"
+            type:
+                type: string
+            category:
+                type: string
+            note:
+                type: string
+    TransactionCategory:
         type: string
-      lastName:
-        type: string
+    BadRequestError:
+        type: object
+        properties:
+            error:
+                type: string
+    UnauthorizedError:
+        type: object
+        properties:
+            error:
+                type: string
+    NotFoundError:
+        type: object
+        properties:
+            error:
+                type: string
+    InternalServerError:
+        type: object
+        properties:
+            error:
+                type: string
+    ErrorResponse:
+        type: object
+        properties:
+            error:
+                type: string
