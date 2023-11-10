@@ -32,12 +32,8 @@ paths:
                         $ref: "#/definitions/LoginResponse"
                 400:
                     description: Invalid Fields
-                    schema:
-                        $ref: "#/definitions/BadRequestError"
                 500:
                     description: Internal Server Error
-                    schema:
-                        $ref: "#/definitions/InternalServerError"
     /user/signup:
         post:
             tags:
@@ -61,12 +57,8 @@ paths:
                         $ref: "#/definitions/ApiResponse"
                 400:
                     description: Invalid Fields
-                    schema:
-                        $ref: "#/definitions/BadRequestError"
                 500:
                     description: Internal Server Error
-                    schema:
-                        $ref: "#/definitions/InternalServerError"
     /user/profile:
         post:
             tags:
@@ -83,8 +75,6 @@ paths:
                   required: true
                   schema:
                       $ref: "#/definitions/UserProfile"
-            security:
-                - Bearer: []
             responses:
                 200:
                     description: User profile retrieved successfully
@@ -92,12 +82,8 @@ paths:
                         $ref: "#/definitions/ApiResponse"
                 400:
                     description: Invalid Fields
-                    schema:
-                        $ref: "#/definitions/BadRequestError"
                 500:
                     description: Internal Server Error
-                    schema:
-                        $ref: "#/definitions/InternalServerError"
         put:
             tags:
                 - User Module
@@ -113,8 +99,6 @@ paths:
                   required: true
                   schema:
                       $ref: "#/definitions/UserProfile"
-            security:
-                - Bearer: []
             responses:
                 200:
                     description: User profile updated successfully
@@ -122,57 +106,96 @@ paths:
                         $ref: "#/definitions/ApiResponse"
                 400:
                     description: Invalid Fields
-                    schema:
-                        $ref: "#/definitions/BadRequestError"
                 500:
                     description: Internal Server Error
-                    schema:
-                        $ref: "#/definitions/InternalServerError"
     /user/accounts:
         get:
             tags:
-                - User Module
+                - Transactions Module
             summary: User Accounts API
             description: API to get all user accounts
             consumes:
                 - application/json
             produces:
                 - application/json
-            security:
-                - Bearer: []
             responses:
                 200:
                     description: Successfully retrieved accounts
                     schema:
                         $ref: "#/definitions/AccountResponse"
                 400:
-                    description: Bad Request - Invalid parameters or request
-                    schema:
-                        $ref: "#/definitions/BadRequestError"
+                    description: Bad Request
                 401:
-                    description: Unauthorized - Access token is missing or invalid
-                    schema:
-                        $ref: "#/definitions/UnauthorizedError"
+                    description: Unauthorized
                 404:
-                    description: Not Found - Resource not found
-                    schema:
-                        $ref: "#/definitions/NotFoundError"
+                    description: Not Found
                 500:
-                    description: Internal Server Error - Something went wrong on the server
+                    description: Internal Server Error
+    /user/accounts/{accountID}:
+        get:
+            tags:
+                - Transactions Module
+            summary: Get User Account
+            description: API to retrieve information about a user account
+            consumes:
+                - application/json
+            produces:
+                - application/json
+            parameters:
+                - name: accountID
+                  in: path
+                  required: true
+                  type: string
+            responses:
+                200:
+                    description: Successfully retrieved the user account details
                     schema:
-                        $ref: "#/definitions/InternalServerError"
+                        $ref: "#/definitions/Account"
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                404:
+                    description: Not Found
+                500:
+                    description: Internal Server Error
+        delete:
+            tags:
+                - Transactions Module
+            summary: Delete User Account
+            description: API to delete a user account
+            consumes:
+                - application/json
+            produces:
+                - application/json
+            parameters:
+                - name: accountID
+                  in: path
+                  required: true
+                  type: string
+            responses:
+                200:
+                    description: Successfully deleted the user account
+                    schema:
+                        $ref: "#/definitions/ApiResponse"
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                404:
+                    description: Not Found
+                500:
+                    description: Internal Server Error
     /user/accounts/{accountID}/transactions:
         get:
             tags:
-                - User Module
+                - Transactions Module
             summary: User Accounts Transactions API
             description: API to get all transactions for a user account
             consumes:
                 - application/json
             produces:
                 - application/json
-            security:
-                - Bearer: []
             parameters:
                 - name: accountID
                   in: path
@@ -185,24 +208,47 @@ paths:
                         $ref: "#/definitions/TransactionsResponse"
                 400:
                     description: Bad Request - Invalid parameters or request
-                    schema:
-                        $ref: "#/definitions/BadRequestError"
                 401:
                     description: Unauthorized - Access token is missing or invalid
-                    schema:
-                        $ref: "#/definitions/UnauthorizedError"
                 404:
                     description: Not Found - Resource not found
-                    schema:
-                        $ref: "#/definitions/NotFoundError"
                 500:
                     description: Internal Server Error - Something went wrong on the server
-                    schema:
-                        $ref: "#/definitions/InternalServerError"
     /user/accounts/{accountID}/transactions/{transactionID}:
-        patch:
+        get:
             tags:
-                - User Module
+                - Transactions Module
+            summary: User Account Transaction API
+            description: API to get information about a specific user account transaction
+            consumes:
+                - application/json
+            produces:
+                - application/json
+            parameters:
+                - name: accountID
+                  in: path
+                  required: true
+                  type: string
+                - name: transactionID
+                  in: path
+                  required: true
+                  type: string
+            responses:
+                200:
+                    description: Successfully retrieved the transaction details
+                    schema:
+                        $ref: "#/definitions/Transaction"
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                404:
+                    description: Not Found
+                500:
+                    description: Internal Server Error
+        put:
+            tags:
+                - Transactions Module
             summary: User Account Transaction API
             description: API to add or update a note or a category on a user account transaction
             consumes:
@@ -235,21 +281,44 @@ paths:
                     schema:
                         $ref: "#/definitions/TransactionsResponse"
                 400:
-                    description: Bad Request - Invalid parameters or request
-                    schema:
-                        $ref: "#/definitions/BadRequestError"
+                    description: Bad Request
                 401:
-                    description: Unauthorized - Access token is missing or invalid
-                    schema:
-                        $ref: "#/definitions/UnauthorizedError"
+                    description: Unauthorized
                 404:
-                    description: Not Found - Resource not found
-                    schema:
-                        $ref: "#/definitions/NotFoundError"
+                    description: Not Found
                 500:
-                    description: Internal Server Error - Something went wrong on the server
+                    description: Internal Server Error
+        delete:
+            tags:
+                - Transactions Module
+            summary: Delete User Account Transaction
+            description: API to delete a specific user account transaction
+            consumes:
+                - application/json
+            produces:
+                - application/json
+            parameters:
+                - name: accountID
+                  in: path
+                  required: true
+                  type: string
+                - name: transactionID
+                  in: path
+                  required: true
+                  type: string
+            responses:
+                200:
+                    description: Successfully deleted the user account transaction
                     schema:
-                        $ref: "#/definitions/InternalServerError"
+                        $ref: "#/definitions/ApiResponse"
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                404:
+                    description: Not Found
+                500:
+                    description: Internal Server Error
 definitions:
     Login:
         type: object
@@ -309,9 +378,7 @@ definitions:
             message:
                 type: string
             body:
-                type: array
-                items:
-                    $ref: "#/definitions/Account"
+                $ref: "#/definitions/Account"
     Account:
         type: object
         properties:
@@ -343,9 +410,7 @@ definitions:
             message:
                 type: string
             body:
-                type: array
-                items:
-                    $ref: "#/definitions/Transaction"
+                $ref: "#/definitions/Transaction"
     Transaction:
         type: object
         properties:
@@ -369,28 +434,3 @@ definitions:
                 type: string
     TransactionCategory:
         type: string
-    BadRequestError:
-        type: object
-        properties:
-            error:
-                type: string
-    UnauthorizedError:
-        type: object
-        properties:
-            error:
-                type: string
-    NotFoundError:
-        type: object
-        properties:
-            error:
-                type: string
-    InternalServerError:
-        type: object
-        properties:
-            error:
-                type: string
-    ErrorResponse:
-        type: object
-        properties:
-            error:
-                type: string
