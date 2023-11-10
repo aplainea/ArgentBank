@@ -159,33 +159,6 @@ paths:
                     description: Not Found
                 500:
                     description: Internal Server Error
-        delete:
-            tags:
-                - Transactions Module
-            summary: Delete User Account
-            description: API to delete a user account
-            consumes:
-                - application/json
-            produces:
-                - application/json
-            parameters:
-                - name: accountID
-                  in: path
-                  required: true
-                  type: string
-            responses:
-                200:
-                    description: Successfully deleted the user account
-                    schema:
-                        $ref: "#/definitions/ApiResponse"
-                400:
-                    description: Bad Request
-                401:
-                    description: Unauthorized
-                404:
-                    description: Not Found
-                500:
-                    description: Internal Server Error
     /user/accounts/{accountID}/transactions:
         get:
             tags:
